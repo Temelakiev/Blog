@@ -1,0 +1,38 @@
+﻿@model List<Blog.Models.Article>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+    <div class="row">
+        <h2 style="text-align:center; vertical-align:middle;">ARTICLES:</h2>
+
+        @foreach (var article in Model)
+        {
+            <div class="col-sm-6">
+                <article>
+                    <header>
+                        <h2>
+                            @Html.ActionLink(@article.Title, "Details", "Article", new { @id = article.Id }, null)
+                        </h2>
+                        @if (@article.ImagePath != string.Empty)
+                        {
+                            <img src="@article.ImagePath" alt="Article Image" style="width: 200px" />
+                        }  
+                    </header>
+                    <p>
+                        @article.Content
+                    </p>
+                    <footer class="pull-right">
+                        <small class="author">
+                            --author @article.Author.FullName
+                        </small>
+                    </footer>
+                </article>
+            </div>
+        }
+    </div>
+</div>
+<hr />
+
