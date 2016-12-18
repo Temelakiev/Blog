@@ -45,6 +45,7 @@ namespace Blog.Controllers
                 var article = database.Articles.Where(a => a.Id == id)
                     .Include(a => a.Author)
                     .Include(a => a.Tags)
+                    .Include(a=>a.Comments)
                     .FirstOrDefault();
 
                 if (article == null)

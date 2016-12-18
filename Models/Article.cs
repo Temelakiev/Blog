@@ -20,6 +20,7 @@ namespace Blog.Models
             this.Content = content;
             this.CategoryId = categoryId;
             this.ImagePath = imagePath;
+            this.Comments = new HashSet<Comment>();
         }
 
         [Key]
@@ -50,5 +51,7 @@ namespace Blog.Models
         public virtual ICollection<Tag> Tags { get; set; }
 
         public string ImagePath { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -25,5 +25,7 @@ namespace Blog.Models
 
         [DataType(DataType.Upload)]
         public HttpPostedFileBase ImageUpload { get; set; }
+        
+        public string Comments { get; set; }
     }
 }

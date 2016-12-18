@@ -26,5 +26,7 @@ namespace Blog.Models
             return new BlogDbContext();
         }
         public virtual IDbSet<Tag> Tags { get; set; }
+
+        public virtual IDbSet<Comment> Comments { get; set; }
     }
 }
