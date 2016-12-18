@@ -20,29 +20,35 @@
         </p>
         @*<iframe width="854" height="480" src="https://www.youtube.com/embed/@Model.VideoUrl" frameborder="0" allowfullscreen></iframe>*@
 
-       
 
-        
+
+
 
         <small class="author">
             --author @Model.Author.FullName
         </small>
-
-        <div class="form-group">
-            @foreach (var comment in Model.Comments)
-            {
-                <div>@comment</div>
-            }
-        </div>
-
-        <div class="form-group col-sm-offset-0">
-            @Html.LabelFor(m => m.Comments, new { @class = "control-label col-sm-4" })
-            <br />
-            <div class="col-sm-3 col-sm-pull-4">
-                @Html.TextAreaFor(m => m.Comments, new { @class = "form-control" })
+        @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+        {
+            <div class="form-group">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div>@comment</div>
+                }
             </div>
-        </div>
 
+            <div class="form-group col-sm-offset-0">
+                @Html.LabelFor(m => m.Comments, new { @class = "control-label col-sm-4" })
+                <br />
+                <div class="col-sm-3 col-sm-pull-4">
+                    @Html.TextAreaFor(m => m.Comments, new { @class = "form-control" })
+                    @Html.ActionLink("Post Comment", "Post Comment", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+
+
+                </div>
+            </div>
+            <br />
+            <br />
+        }
         <footer class="pull-right">
             @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
             {
