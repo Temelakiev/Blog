@@ -14,7 +14,7 @@ namespace Blog.Controllers
         public ActionResult Index()
         {
             return RedirectToAction("ListCategories");
-        } 
+        }
         public ActionResult ListCategories()
         {
             using (var database = new BlogDbContext())
@@ -25,10 +25,10 @@ namespace Blog.Controllers
 
                 return View(categories);
             }
-        } 
-        public ActionResult ListArticles(int ? categoryId)
+        }
+        public ActionResult ListArticles(int? categoryId)
         {
-            if (categoryId==null)
+            if (categoryId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -36,11 +36,12 @@ namespace Blog.Controllers
             {
                 var articles = database.Articles.Where(a => a.CategoryId == categoryId)
                     .Include(a => a.Author)
-                    .Include(a=>a.Tags)
+                    .Include(a => a.Tags)
+                    .Include(a => a.Comments)
                     .ToList();
 
                 return View(articles);
             }
-        }    
+        }
     }
 }

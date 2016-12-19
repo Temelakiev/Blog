@@ -20,17 +20,17 @@ namespace Blog.Controllers
         // GET: Article/List
         public ActionResult List()
         {
-            using (var database = new BlogDbContext())
-            {
-                // Get articles from database
-                var articles = database.Articles
-                    .Include(a => a.Author)
-                    .Include(a => a.Tags)
-                    .ToList();
+            var database = new BlogDbContext();
+            // Get articles from database
+            var articles = database.Articles
+                .Include(a => a.Author)
+                .Include(a => a.Tags)
+                .Include(a => a.Comments)
+                .ToList();
 
-                return View(articles);
-            }
+            return View(articles);
         }
+
         //
         // GET:Article/Details
         public ActionResult Details(int? id)
@@ -45,7 +45,7 @@ namespace Blog.Controllers
                 var article = database.Articles.Where(a => a.Id == id)
                     .Include(a => a.Author)
                     .Include(a => a.Tags)
-                    .Include(a=>a.Comments)
+                    .Include(a => a.Comments)
                     .FirstOrDefault();
 
                 if (article == null)
@@ -129,6 +129,29 @@ namespace Blog.Controllers
 
             return View(model);
         }
+
+        public ActionResult PostComment(int id, string commentContent)
+        {
+            using (var context = new BlogDbContext())
+            {
+                var article = context.Articles.Find(id);
+                var authorId = context.Users
+                        .FirstOrDefault(u => u.UserName == this.User.Identity.Name)
+                        .Id;
+
+                var comment = new Comment
+                {
+                    Content = commentContent,
+                    AuthorId = authorId
+                };
+
+                article.Comments.Add(comment);
+
+                context.SaveChanges();
+                return RedirectToAction("Details", new { id = article.Id });
+            }
+        }
+
         //
         // GET: Article/Delete
         public ActionResult Delete(int? id)

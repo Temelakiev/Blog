@@ -27,25 +27,30 @@
         <small class="author">
             --author @Model.Author.FullName
         </small>
-        @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+        @foreach (var comment in Model.Comments)
+            {
+            <div>@comment.Content</div>
+            <small class="author">
+                --author @comment.Author.FullName
+            </small>
+        }
+
+        @if (this.User.Identity.IsAuthenticated)
         {
-            <div class="form-group">
-                @foreach (var comment in Model.Comments)
-                {
-                    <div>@comment</div>
-                }
-            </div>
-
-            <div class="form-group col-sm-offset-0">
-                @Html.LabelFor(m => m.Comments, new { @class = "control-label col-sm-4" })
-                <br />
-                <div class="col-sm-3 col-sm-pull-4">
-                    @Html.TextAreaFor(m => m.Comments, new { @class = "form-control" })
-                    @Html.ActionLink("Post Comment", "Post Comment", "Comment", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
-
-
+            using (Html.BeginForm("PostComment", "Article", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group col-sm-offset-0">
+                    @Html.Label("Post a comment", new { @class = "control-label col-sm-4" })
+                    
+                    <div class="col-sm-3 col-sm-pull-4">
+                        @Html.TextArea("commentContent", new { @class = "form-control" })
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Post" class="btn btn-success" />
+                </div>
+            }
             <br />
             <br />
         }

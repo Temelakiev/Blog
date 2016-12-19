@@ -215,6 +215,7 @@
     <Compile Include="Models\BlogDbContext.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\EditUserViewModel.cs" />
     <Compile Include="Models\Images.cs" />
     <Compile Include="Models\keyAttribute.cs" />
