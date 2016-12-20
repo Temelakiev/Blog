@@ -298,12 +298,12 @@
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Home\ListArticles.cshtml" />
     <Content Include="Views\Home\ListCategories.cshtml" />
+    <Content Include="Views\Tag\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Tag\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

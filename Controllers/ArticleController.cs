@@ -46,6 +46,7 @@ namespace Blog.Controllers
                     .Include(a => a.Author)
                     .Include(a => a.Tags)
                     .Include(a => a.Comments)
+                    .Include(a => a.Comments.Select(C => C.Author))
                     .FirstOrDefault();
 
                 if (article == null)
@@ -130,6 +131,8 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
         public ActionResult PostComment(int id, string commentContent)
         {
             using (var context = new BlogDbContext())

@@ -29,7 +29,7 @@
         </small>
         @foreach (var comment in Model.Comments)
             {
-            <div>@comment.Content</div>
+            <div>@Html.Raw(comment.Content)</div>
             <small class="author">
                 --author @comment.Author.FullName
             </small>
