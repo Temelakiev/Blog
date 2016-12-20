@@ -126,11 +126,16 @@ namespace Blog.Controllers.Admin
             {
                 var category = database.Categories
                     .FirstOrDefault(c => c.Id == id);
-
+                var comments = database.Comments;
                 var categoryArticles = category.Articles.ToList();
+                
 
                 foreach (var article in categoryArticles)
                 {
+                    foreach (var comment in comments)
+                    {
+                        database.Comments.Remove(comment);
+                    }
                     database.Articles.Remove(article);
                 }
 

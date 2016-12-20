@@ -143,6 +143,7 @@ namespace Blog.Controllers
                 {
                     Content = commentContent,
                     AuthorId = authorId
+
                 };
 
                 article.Comments.Add(comment);

@@ -39,17 +39,22 @@
         {
             using (Html.BeginForm("PostComment", "Article", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
             {
-                <div class="form-group col-sm-offset-0">
-                    @Html.Label("Post a comment", new { @class = "control-label col-sm-4" })
+                <div class="form-group col-sm-pull-4">
+                    @Html.Label("Post a comment", new { @class = "control-label " })
+                    <br />
                     
-                    <div class="col-sm-3 col-sm-pull-4">
+                    <div class="col-sm-pull-3 col-sm-pull-0 ">
                         @Html.TextArea("commentContent", new { @class = "form-control" })
+                    </div>
+                    
+                    
+                    <
+                    <div class="form-group col-sm-10 ">
+                        <input type="submit" value="Post" class="btn btn-success" />
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <input type="submit" value="Post" class="btn btn-success" />
-                </div>
+               
             }
             <br />
             <br />

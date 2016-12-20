@@ -302,6 +302,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="Views\Comment\" />
     <Folder Include="Views\Tag\" />
   </ItemGroup>
   <ItemGroup>
